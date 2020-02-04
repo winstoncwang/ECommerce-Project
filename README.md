@@ -21,3 +21,8 @@ The following features are implemented (updating):
 V 0.11
 
     npm initiation
+-----
+
+V 0.12
+
+    setup express and nodemon for development
