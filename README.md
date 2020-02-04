@@ -15,3 +15,9 @@ The following features are implemented (updating):
 
 - Administrator login page
 
+
+-----
+
+V 0.11
+
+    npm initiation
