@@ -21,8 +21,15 @@ The following features are implemented (updating):
 V 0.11
 
     npm initiation
+
 -----
 
 V 0.12
 
     setup express and nodemon for development
+
+-----
+
+V 0.13
+
+    start routing using express and monitor using nodemon
