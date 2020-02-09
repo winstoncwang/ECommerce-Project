@@ -17,6 +17,16 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
+	req.on('data', (data) => {
+		const parsedData = data.toString('utf8').split('&');
+		const formData = {};
+		parsedData.forEach((string) => {
+			const [ key, value ] = string.split('=');
+			formData[key] = value;
+		});
+
+		console.log(formData);
+	});
 	res.send('Account Created!!');
 });
 
