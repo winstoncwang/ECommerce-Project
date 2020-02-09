@@ -45,9 +45,16 @@ V 0.14
 V 0.15
 
     creating a form for sign up for admins with using post method
+    
 -----
 
 V 0.16
 
     parse data from request form sent from browser
+
+-----
+
+V 0.17
+
+    example of middleware of body parsing technique without edge caese.
 
