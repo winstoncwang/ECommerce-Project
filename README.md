@@ -58,3 +58,9 @@ V 0.17
 
     example of middleware of body parsing technique without edge caese.
 
+-----
+
+V 0.18
+
+    express body-parser middleware implemented.
+
