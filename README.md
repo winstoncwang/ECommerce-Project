@@ -64,3 +64,11 @@ V 0.18
 
     express body-parser middleware implemented.
 
+-----
+
+V 0.19
+
+   merge pushing all package module settings.
+
+
+    
