@@ -76,5 +76,11 @@ V 0.21
 
    creating custom data storage using user.js to form user.json file using fs.access/write
 
+-----
+
+V 0.22
+
+   parsing data and testing data using getAll() method
+
 
     
