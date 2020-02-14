@@ -82,5 +82,11 @@ V 0.22
 
    parsing data and testing data using getAll() method
 
+-----
+
+V 0.23
+
+   refractor getAll()
+
 
     
