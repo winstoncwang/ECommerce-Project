@@ -16,6 +16,7 @@ class UsersRepository {
 		}
 	}
 
+	//shows all users
 	async getAll () {
 		//open the file called this.filename
 		//read its content
@@ -28,10 +29,17 @@ class UsersRepository {
 		);
 	}
 
+	//create new users and push to currentRecords
 	async create (attrs) {
 		//read existing json file
 		const currentRecords = await this.getAll();
 		currentRecords.push(attrs);
+
+		await this.writeAll(currentRecords);
+	}
+
+	//write all to data store
+	async writeAll (currentRecords) {
 		await fs.promises.writeFile(
 			this.filename,
 			JSON.stringify(currentRecords)
