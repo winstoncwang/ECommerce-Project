@@ -94,5 +94,11 @@ V 0.24
 
    add create() and push data into the data storage
 
+-----
+
+V 0.25
+
+   add writeAll() to write all currentRecords from create()
+
 
     
