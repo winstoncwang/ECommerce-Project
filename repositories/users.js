@@ -1,4 +1,5 @@
 const fs = require('fs');
+const crypto = require('crypto');
 
 class UsersRepository {
 	constructor (filename) {
@@ -33,6 +34,7 @@ class UsersRepository {
 	async create (attrs) {
 		//read existing json file
 		const currentRecords = await this.getAll();
+		attrs.id = this.randomID();
 		currentRecords.push(attrs);
 
 		await this.writeAll(currentRecords);
@@ -42,8 +44,12 @@ class UsersRepository {
 	async writeAll (currentRecords) {
 		await fs.promises.writeFile(
 			this.filename,
-			JSON.stringify(currentRecords)
+			JSON.stringify(currentRecords, null, 2) // format with null for custom formater, 2 for indentation
 		);
+	}
+
+	randomID () {
+		return crypto.randomBytes(5).toString('hex'); //we are not using callbacks, hence this is not async
 	}
 }
 
