@@ -100,5 +100,16 @@ V 0.25
 
    add writeAll() to write all currentRecords from create()
 
+-----
+
+V 0.26
+
+   indentation using JSON stringify()
+
+-----
+
+V 0.27
+
+   add a unique randomised ID using fs.randomByte
 
     
