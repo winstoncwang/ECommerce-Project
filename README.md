@@ -112,4 +112,10 @@ V 0.27
 
    add a unique randomised ID using fs.randomByte
 
+-----
+
+V 0.28
+
+   implement getOne() to find user according to unique id
+
     
