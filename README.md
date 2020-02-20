@@ -117,5 +117,11 @@ V 0.27
 V 0.28
 
    implement getOne() to find user according to unique id
+ 
+-----
 
+V 0.281
+
+   implement delete() to find user according to unique id and remove record
+ 
     
