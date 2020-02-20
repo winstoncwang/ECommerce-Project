@@ -48,6 +48,14 @@ class UsersRepository {
 		);
 	}
 
+	//getOne(id)
+	async getOne (id) {
+		//read users.json
+		const users = await this.getAll();
+		//array.find()
+		return users.find((user) => user.id === id);
+	}
+
 	randomID () {
 		return crypto.randomBytes(5).toString('hex'); //we are not using callbacks, hence this is not async
 	}
@@ -55,14 +63,8 @@ class UsersRepository {
 
 const test = async () => {
 	const repo = new UsersRepository('users.json');
-	await repo.create({
-		FirstName  : 'bob',
-		SecondName : 'dilly',
-		UserName   : 'bobod',
-		Password   : 'password'
-	});
-	const users = await repo.getAll();
-	console.log(users);
+	const user = await repo.getOne('ffac6d61a5');
+	console.log(user);
 };
 
 test();
