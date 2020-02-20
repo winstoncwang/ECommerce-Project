@@ -56,6 +56,16 @@ class UsersRepository {
 		return users.find((user) => user.id === id);
 	}
 
+	//delete(id)
+	async delete (id) {
+		//read users.json
+		const users = await this.getAll();
+		//delete record
+		const filteredRecords = users.filter((user) => user.id !== id);
+
+		await this.writeAll(filteredRecords);
+	}
+
 	randomID () {
 		return crypto.randomBytes(5).toString('hex'); //we are not using callbacks, hence this is not async
 	}
@@ -63,8 +73,7 @@ class UsersRepository {
 
 const test = async () => {
 	const repo = new UsersRepository('users.json');
-	const user = await repo.getOne('ffac6d61a5');
-	console.log(user);
+	await repo.delete('4c7d86a702');
 };
 
 test();
