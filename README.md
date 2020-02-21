@@ -124,4 +124,10 @@ V 0.281
 
    implement delete() to find user according to unique id and remove record
  
+-----
+
+V 0.282
+
+   implement update() to find user according to unique id and object.assign the new attributes
+ 
     
