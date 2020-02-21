@@ -51,19 +51,39 @@ class UsersRepository {
 	//getOne(id)
 	async getOne (id) {
 		//read users.json
-		const users = await this.getAll();
+		const currentRecords = await this.getAll();
 		//array.find()
-		return users.find((user) => user.id === id);
+		return currentRecords.find((record) => record.id === id);
 	}
 
 	//delete(id)
 	async delete (id) {
 		//read users.json
-		const users = await this.getAll();
+		const currentRecords = await this.getAll();
 		//delete record
-		const filteredRecords = users.filter((user) => user.id !== id);
+		const filteredRecords = currentRecords.filter(
+			(record) => record.id !== id
+		);
 
 		await this.writeAll(filteredRecords);
+	}
+
+	//update (id,attrs)
+	async update (id, attrs) {
+		//read in all users
+		const currentRecords = await this.getAll();
+		//find user with id
+		const record = currentRecords.find((record) => record.id === id);
+		// if not find notify
+		if (!record) {
+			throw new Error(`Record with id of ${id} not found.`);
+		}
+
+		//update attrs
+		Object.assign(record, attrs); //since we are mutating the record object, we are essentially changing currentRecords, so we dont have to add new object, we can push original array of object.
+
+		//write all
+		await this.writeAll(currentRecords);
 	}
 
 	randomID () {
@@ -73,7 +93,7 @@ class UsersRepository {
 
 const test = async () => {
 	const repo = new UsersRepository('users.json');
-	await repo.delete('4c7d86a702');
+	await repo.update('5cb71a8d53', { password: 'asdu' });
 };
 
 test();
