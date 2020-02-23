@@ -30,40 +30,38 @@ class UsersRepository {
 		);
 	}
 
-	//create new users and push to currentRecords
+	//create new users and push to allRecords
 	async create (attrs) {
 		//read existing json file
-		const currentRecords = await this.getAll();
+		const allRecords = await this.getAll();
 		attrs.id = this.randomID();
-		currentRecords.push(attrs);
+		allRecords.push(attrs);
 
-		await this.writeAll(currentRecords);
+		await this.writeAll(allRecords);
 	}
 
 	//write all to data store
-	async writeAll (currentRecords) {
+	async writeAll (allRecords) {
 		await fs.promises.writeFile(
 			this.filename,
-			JSON.stringify(currentRecords, null, 2) // format with null for custom formater, 2 for indentation
+			JSON.stringify(allRecords, null, 2) // format with null for custom formater, 2 for indentation
 		);
 	}
 
 	//getOne(id)
 	async getOne (id) {
 		//read users.json
-		const currentRecords = await this.getAll();
+		const allRecords = await this.getAll();
 		//array.find()
-		return currentRecords.find((record) => record.id === id);
+		return allRecords.find((record) => record.id === id);
 	}
 
 	//delete(id)
 	async delete (id) {
 		//read users.json
-		const currentRecords = await this.getAll();
+		const allRecords = await this.getAll();
 		//delete record
-		const filteredRecords = currentRecords.filter(
-			(record) => record.id !== id
-		);
+		const filteredRecords = allRecords.filter((record) => record.id !== id);
 
 		await this.writeAll(filteredRecords);
 	}
@@ -71,19 +69,43 @@ class UsersRepository {
 	//update (id,attrs)
 	async update (id, attrs) {
 		//read in all users
-		const currentRecords = await this.getAll();
+		const allRecords = await this.getAll();
 		//find user with id
-		const record = currentRecords.find((record) => record.id === id);
+		const record = allRecords.find((record) => record.id === id);
 		// if not find notify
 		if (!record) {
 			throw new Error(`Record with id of ${id} not found.`);
 		}
 
 		//update attrs
-		Object.assign(record, attrs); //since we are mutating the record object, we are essentially changing currentRecords, so we dont have to add new object, we can push original array of object.
+		Object.assign(record, attrs); //since we are mutating the record object, we are essentially changing allRecords, so we dont have to add new object, we can push original array of object.
 
 		//write all
-		await this.writeAll(currentRecords);
+		await this.writeAll(allRecords);
+	}
+
+	//getOneBy()
+	/* 
+	Returns the object that satisfies the filter strictly checked for both key and value pair.
+	As long as the key-value is equal, return user. No of filter is inaffective.
+	@param {Object} key value pair for email etc
+	@returns {Object} return user object
+	*/
+
+	async getOneBy (filters) {
+		const allRecords = await this.getAll();
+		for (let user of allRecords) {
+			let found = true;
+
+			for (let key in filters) {
+				if (user[key] !== filters[key]) {
+					found = false;
+				}
+			}
+			if (found) {
+				return user;
+			}
+		}
 	}
 
 	randomID () {
@@ -91,9 +113,4 @@ class UsersRepository {
 	}
 }
 
-const test = async () => {
-	const repo = new UsersRepository('users.json');
-	await repo.update('5cb71a8d53', { password: 'asdu' });
-};
-
-test();
+module.exports = new UsersRepository('users.json');
