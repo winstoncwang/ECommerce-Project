@@ -130,4 +130,10 @@ V 0.282
 
    implement update() to find user according to unique id and object.assign the new attributes
  
+-----
+
+V 0.283
+
+   implemented getOneBy() used to add filter for finding user
+ 
     
