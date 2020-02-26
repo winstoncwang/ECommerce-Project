@@ -136,4 +136,9 @@ V 0.283
 
    implemented getOneBy() used to add filter for finding user
  
-    
+-----
+
+V 0.284
+
+   exports and required in index.js. check for email duplicates and password confirmation.
+  
