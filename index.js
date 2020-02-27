@@ -43,10 +43,14 @@ app.post('/', bodyParser.urlencoded({ extended: true }), async (req, res) => {
 	if (exisitingUser) {
 		res.send('Email in use!');
 	}
-
+	//check password confirmation
 	if (password !== passwordConfirmation) {
 		res.send('Password must match');
 	}
+	//create user
+	const newUser = await usersRepo.create({ email, password });
+
+	//store cookie using third party library
 
 	res.send('Account Created!!');
 });

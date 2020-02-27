@@ -38,6 +38,8 @@ class UsersRepository {
 		allRecords.push(attrs);
 
 		await this.writeAll(allRecords);
+
+		return attrs;
 	}
 
 	//write all to data store
