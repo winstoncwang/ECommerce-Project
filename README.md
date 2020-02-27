@@ -142,3 +142,9 @@ V 0.284
 
    exports and required in index.js. check for email duplicates and password confirmation.
   
+-----
+
+V 0.31
+
+   create user and retrieve the new user object.
+  
