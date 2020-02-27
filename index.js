@@ -4,23 +4,7 @@ const usersRepo = require('./repositories/users');
 
 const app = express();
 
-// const bodyParser = (req, res, next) => {
-// 	if (req.method === 'POST') {
-// 		req.on('data', (data) => {
-// 			const parsedData = data.toString('utf8').split('&');
-// 			const formData = {};
-// 			parsedData.forEach((string) => {
-// 				const [ key, value ] = string.split('=');
-// 				formData[key] = value;
-// 			});
-
-// 			req.body = formData;
-// 			next(); //checks for POST method, if true parse the string and continue with next() function
-// 		});
-// 	} else {
-// 		next(); //else continue with next().
-// 	}
-// };
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
 	res.send(`
@@ -36,7 +20,7 @@ app.get('/', (req, res) => {
 	`);
 });
 
-app.post('/', bodyParser.urlencoded({ extended: true }), async (req, res) => {
+app.post('/', async (req, res) => {
 	const { email, password, passwordConfirmation } = req.body;
 	//check email duplication
 	const exisitingUser = await usersRepo.getOneBy({ email });
