@@ -148,3 +148,9 @@ V 0.31
 
    create user and retrieve the new user object.
   
+-----
+
+V 0.311
+
+   clearing up the codes and overall structure
+  
