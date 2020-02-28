@@ -154,3 +154,9 @@ V 0.311
 
    clearing up the codes and overall structure
   
+-----
+
+V 0.32
+
+   setting up sign up and sign out end point for the site
+  
