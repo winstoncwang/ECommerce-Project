@@ -165,4 +165,10 @@ V 0.32
 V 0.321
 
    server logic for signin post
+
+-----
+
+V 0.322
+
+   email password checked before signin using cookies
   
