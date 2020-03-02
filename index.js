@@ -68,7 +68,21 @@ app.get('/signin', (req, res) => {
 	`);
 });
 
-app.post('/signin', (req, res) => {});
+app.post('/signin', async (req, res) => {
+	//check for existance of email inside data storage
+	const { email, password } = req.body;
+	const user = await usersRepo.getOneBy({ email });
+	if (!user) {
+		res.send('Invalid email, re-enter or sign up');
+	}
+	//check for the correct password
+	if (user.password !== password) {
+		return res.send('Incorrect password');
+	}
+	//sign in (essentially manipulating cookies)
+	req.session.userId = user.id;
+	res.send('You are logged in!');
+});
 
 app.listen(3000, () => {
 	console.log('listening');
