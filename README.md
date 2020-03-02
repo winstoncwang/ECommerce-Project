@@ -160,3 +160,9 @@ V 0.32
 
    setting up sign up and sign out end point for the site
   
+-----
+
+V 0.321
+
+   server logic for signin post
+  
