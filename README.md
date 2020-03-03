@@ -172,3 +172,9 @@ V 0.322
 
    email password checked before signin using cookies
   
+-----
+
+V 0.33
+
+   hash and salt version of the password added to improved security
+  
