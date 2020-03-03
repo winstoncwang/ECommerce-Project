@@ -1,5 +1,8 @@
 const fs = require('fs');
 const crypto = require('crypto');
+const util = require('util');
+
+const scrypt = util.promisify(crypto.scrypt);
 
 class UsersRepository {
 	constructor (filename) {
@@ -32,14 +35,24 @@ class UsersRepository {
 
 	//create new users and push to allRecords
 	async create (attrs) {
+		//create salt
+		const salt = crypto.randomBytes(8).toString('hex');
+		//encrypt password with salt
+		const buffer = await scrypt(attrs.password, salt, 64);
+
 		//read existing json file
 		const allRecords = await this.getAll();
 		attrs.id = this.randomID();
-		allRecords.push(attrs);
+		//push hash+salt password
+		const hashedRecord = {
+			...attrs,
+			password : `${buffer.toString('hex')}.${salt}` //this overwrites the password
+		};
+		allRecords.push(hashedRecord);
 
 		await this.writeAll(allRecords);
 
-		return attrs;
+		return hashedRecord; //attrs only include plain password version. So changed from return attrs
 	}
 
 	//write all to data store
