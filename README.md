@@ -184,3 +184,9 @@ V 0.34
 
    compare password logic of using hash and salt algorithm
   
+-----
+
+V 0.35
+
+   implemented in sign in logic with hash.salt password
+  
