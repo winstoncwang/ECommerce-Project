@@ -75,13 +75,18 @@ app.post('/signin', async (req, res) => {
 	if (!user) {
 		res.send('Invalid email, re-enter or sign up');
 	}
-	//check for the correct password
-	if (user.password !== password) {
-		return res.send('Incorrect password');
+
+	//compare password(saved,supplied)
+	const passwordCheck = await usersRepo.comparePassword(
+		user.password,
+		password
+	);
+
+	if (passwordCheck) {
+		//sign in (essentially manipulating cookies)
+		req.session.userId = user.id;
+		res.send('You are logged in!');
 	}
-	//sign in (essentially manipulating cookies)
-	req.session.userId = user.id;
-	res.send('You are logged in!');
 });
 
 app.listen(3000, () => {
