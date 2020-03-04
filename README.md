@@ -178,3 +178,9 @@ V 0.33
 
    hash and salt version of the password added to improved security
   
+-----
+
+V 0.34
+
+   compare password logic of using hash and salt algorithm
+  
