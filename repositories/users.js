@@ -55,6 +55,18 @@ class UsersRepository {
 		return hashedRecord; //attrs only include plain password version. So changed from return attrs
 	}
 
+	//compare the passwords
+	/* @param {Object} saved - saved password hash.salt format from database
+	@param {Object} supplied - password from user client
+	@return {Boolean} depending on the check result */
+	async comparePassword (saved, supplied) {
+		//define hash/salt
+		const [ hashed, salt ] = saved.split('.');
+		const hashSupplied = await scrypt(supplied, salt, 64);
+
+		return hashed === hashSupplied; //remember hashed includes hash+random salt. so dont use saved.
+	}
+
 	//write all to data store
 	async writeAll (allRecords) {
 		await fs.promises.writeFile(
