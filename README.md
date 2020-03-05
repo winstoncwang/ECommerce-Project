@@ -190,3 +190,9 @@ V 0.35
 
    implemented in sign in logic with hash.salt password
   
+-----
+
+V 0.36
+
+   full flow and improvements
+  
