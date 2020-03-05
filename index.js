@@ -82,11 +82,13 @@ app.post('/signin', async (req, res) => {
 		password
 	);
 
-	if (passwordCheck) {
-		//sign in (essentially manipulating cookies)
-		req.session.userId = user.id;
-		res.send('You are logged in!');
+	if (!passwordCheck) {
+		res.send('Invalid password, please check again.');
 	}
+
+	//sign in (essentially manipulating cookies)
+	req.session.userId = user.id;
+	res.send('You are logged in!');
 });
 
 app.listen(3000, () => {
