@@ -5,21 +5,13 @@ const usersRepo = require('../../repositories/users');
 // A Router instance is a complete middleware and routing system; for this reason, it is often referred to as a “mini-app”.
 const express = require('express');
 const router = express.Router();
+//require in html template
+const signupTemp = require('../../views/admin/auth/signup');
+const signinTemp = require('../../views/admin/auth/signin');
 
-//SIGN UP
+//SIGN UP router
 router.get('/signup', (req, res) => {
-	res.send(`
-	<div>
-		<h2>Signed in as ${req.session.userId}.</h2>
-		<label>Sign Up Form</label>
-		<form method="POST">
-			<input name="email" type="text" placeholder="Email">
-			<input name="password" type="password" placeholder="Password">
-			<input name="passwordConfirmation" type="password" placeholder="Confirmation Password">
-			<button>Sign Up</button>
-		</form>
-	</div>
-	`);
+	res.send(signupTemp({ req }));
 });
 
 router.post('/signup', async (req, res) => {
@@ -50,16 +42,7 @@ router.get('/signout', (req, res) => {
 
 //SIGN IN
 router.get('/signin', (req, res) => {
-	res.send(`
-	<div>
-		<label>Sign In</label>
-		<form method="POST">
-		<input name="email" type="text" placeholder="Email">
-		<input name="password" type="password" placeholder="Password">
-		<button>Sign In</button>
-		</form>
-	</div>
-	`);
+	res.send(signinTemp());
 });
 
 router.post('/signin', async (req, res) => {
