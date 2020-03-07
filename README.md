@@ -196,3 +196,9 @@ V 0.36
 
    full flow and improvements
   
+-----
+
+V 0.41
+
+   implement sub router middleware for auth.js
+  
