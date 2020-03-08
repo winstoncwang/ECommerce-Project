@@ -220,3 +220,9 @@ V 0.42
 
    setup express validator for our authentication form
  
+-----
+
+V 0.43
+
+   email password validation and sanitization
+ 
