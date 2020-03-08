@@ -214,3 +214,9 @@ V 0.412
 
    introducing full html template
  
+-----
+
+V 0.42
+
+   setup express validator for our authentication form
+ 
