@@ -4,6 +4,9 @@ const usersRepo = require('../../repositories/users');
 //this is exported and used using app.use
 // A Router instance is a complete middleware and routing system; for this reason, it is often referred to as a “mini-app”.
 const express = require('express');
+//express middleware for validation
+const { check, validationResult } = require('express-validator');
+//express middleware subrouter handler
 const router = express.Router();
 //require in html template
 const signupTemp = require('../../views/admin/auth/signup');
@@ -14,25 +17,38 @@ router.get('/signup', (req, res) => {
 	res.send(signupTemp({ req }));
 });
 
-router.post('/signup', async (req, res) => {
-	const { email, password, passwordConfirmation } = req.body;
-	//check email duplication
-	const exisitingUser = await usersRepo.getOneBy({ email });
-	if (exisitingUser) {
-		res.send('Email in use!');
-	}
-	//check password confirmation
-	if (password !== passwordConfirmation) {
-		res.send('Password must match');
-	}
-	//create user
-	const newUser = await usersRepo.create({ email, password });
+router.post(
+	'/signup',
+	[
+		check('email').trim().normalizeEmail().isEmail(),
+		check('password').trim().isLength({ min: 4, max: 20 }),
+		check('passwordConfirmation').trim().isLength({ min: 4, max: 20 })
+	],
+	async (req, res) => {
+		//validator object
+		const err = validationResult(req);
+		console.log(err);
 
-	//store cookie using third party library
-	req.session.userId = newUser.id;
+		const { email, password, passwordConfirmation } = req.body;
+		//check email duplication
+		const exisitingUser = await usersRepo.getOneBy({ email });
 
-	res.send('Account Created!!');
-});
+		if (exisitingUser) {
+			res.send('Email in use!');
+		}
+		//check password confirmation
+		if (password !== passwordConfirmation) {
+			res.send('Password must match');
+		}
+		//create user
+		const newUser = await usersRepo.create({ email, password });
+
+		//store cookie using third party library
+		req.session.userId = newUser.id;
+
+		res.send('Account Created!!');
+	}
+);
 
 //SIGN OUT
 router.get('/signout', (req, res) => {
