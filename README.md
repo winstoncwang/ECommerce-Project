@@ -226,3 +226,9 @@ V 0.43
 
    email password validation and sanitization
  
+-----
+
+V 0.431
+
+   adding custom validation for email and pass
+ 
