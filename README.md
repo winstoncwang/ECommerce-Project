@@ -232,3 +232,9 @@ V 0.431
 
    adding custom validation for email and pass
  
+-----
+
+V 0.432
+
+   customised validator extracted
+ 
