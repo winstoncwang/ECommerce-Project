@@ -20,9 +20,27 @@ router.get('/signup', (req, res) => {
 router.post(
 	'/signup',
 	[
-		check('email').trim().normalizeEmail().isEmail(),
+		check('email')
+			.trim()
+			.normalizeEmail()
+			.isEmail()
+			.custom(async (emailInput) => {
+				//check email duplication
+				const exisitingUser = await usersRepo.getOneBy({ emailInput });
+				if (!exisitingUser) {
+					throw new Error('Email in use!');
+				}
+			}),
 		check('password').trim().isLength({ min: 4, max: 20 }),
-		check('passwordConfirmation').trim().isLength({ min: 4, max: 20 })
+		check('passwordConfirmation')
+			.trim()
+			.isLength({ min: 4, max: 20 })
+			.custom((passwordConfirmation, { req }) => {
+				//check password confirmation
+				if (req.body.password !== passwordConfirmation) {
+					throw new Error('Password must match');
+				}
+			})
 	],
 	async (req, res) => {
 		//validator object
@@ -30,23 +48,16 @@ router.post(
 		console.log(err);
 
 		const { email, password, passwordConfirmation } = req.body;
-		//check email duplication
-		const exisitingUser = await usersRepo.getOneBy({ email });
 
-		if (exisitingUser) {
-			res.send('Email in use!');
+		if (!err) {
+			//create user
+			const newUser = await usersRepo.create({ email, password });
+
+			//store cookie using third party library
+			req.session.userId = newUser.id;
+
+			res.send('Account Created!!');
 		}
-		//check password confirmation
-		if (password !== passwordConfirmation) {
-			res.send('Password must match');
-		}
-		//create user
-		const newUser = await usersRepo.create({ email, password });
-
-		//store cookie using third party library
-		req.session.userId = newUser.id;
-
-		res.send('Account Created!!');
 	}
 );
 

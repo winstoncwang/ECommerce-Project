@@ -1,22 +1,12 @@
 [
-  {
-    "email": "sodiuad@gmail.com",
-    "id": "5cb71a8d53",
-    "password": "asdu"
-  },
-  {
-    "email": "test123@test.com",
-    "password": "12345",
-    "id": "d32af50e5c"
-  },
-  {
-    "email": "owuej@gmail.com",
-    "password": "f4ea481ad03aa7930bb503ed33a899e2b22b8c69fe84072e5c338b9bb073d0a6c45a598a6f5519487038cec8b5e9ebeb490f2f21fd3950f5eb9cb6af63f74f90.f76d57dcba415e3d",
-    "id": "09bdb7da25"
-  },
-  {
-    "email": "@asdasdasdasd",
-    "password": "dc7795b7e911b191468b4e932ae7ff55eb8fb424284c8c1a5834fed9df252e79a437ae84e57fc80752ffa065f194b93b739f920e69e2ccdf3037b914068f493a.4cd5d6035c739a97",
-    "id": "245e0ec6ff"
-  }
+	{
+		"email": "test123@test.com",
+		"password": "12345",
+		"id": "d32af50e5c"
+	},
+	{
+		"email": "owuej@gmail.com",
+		"password": "f4ea481ad03aa7930bb503ed33a899e2b22b8c69fe84072e5c338b9bb073d0a6c45a598a6f5519487038cec8b5e9ebeb490f2f21fd3950f5eb9cb6af63f74f90.f76d57dcba415e3d",
+		"id": "09bdb7da25"
+	}
 ]
