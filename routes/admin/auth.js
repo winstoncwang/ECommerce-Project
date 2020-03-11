@@ -11,6 +11,12 @@ const router = express.Router();
 //require in html template
 const signupTemp = require('../../views/admin/auth/signup');
 const signinTemp = require('../../views/admin/auth/signin');
+//custom validator
+const {
+	requireEmail,
+	requirePassword,
+	requirePasswordConfirmation
+} = require('./validators');
 
 //SIGN UP router
 router.get('/signup', (req, res) => {
@@ -19,29 +25,7 @@ router.get('/signup', (req, res) => {
 
 router.post(
 	'/signup',
-	[
-		check('email')
-			.trim()
-			.normalizeEmail()
-			.isEmail()
-			.custom(async (emailInput) => {
-				//check email duplication
-				const exisitingUser = await usersRepo.getOneBy({ emailInput });
-				if (!exisitingUser) {
-					throw new Error('Email in use!');
-				}
-			}),
-		check('password').trim().isLength({ min: 4, max: 20 }),
-		check('passwordConfirmation')
-			.trim()
-			.isLength({ min: 4, max: 20 })
-			.custom((passwordConfirmation, { req }) => {
-				//check password confirmation
-				if (req.body.password !== passwordConfirmation) {
-					throw new Error('Password must match');
-				}
-			})
-	],
+	[ requireEmail, requirePassword, requirePasswordConfirmation ],
 	async (req, res) => {
 		//validator object
 		const err = validationResult(req);
