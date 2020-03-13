@@ -238,3 +238,9 @@ V 0.432
 
    customised validator extracted
  
+-----
+
+V 0.433
+
+   render signup form and display error if any
+ 
