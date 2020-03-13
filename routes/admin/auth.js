@@ -29,19 +29,17 @@ router.post(
 	async (req, res) => {
 		//validator object
 		const err = validationResult(req);
-		console.log(err);
-
-		const { email, password, passwordConfirmation } = req.body;
-
-		if (!err) {
-			//create user
-			const newUser = await usersRepo.create({ email, password });
-
-			//store cookie using third party library
-			req.session.userId = newUser.id;
-
-			res.send('Account Created!!');
+		if (!err.isEmpty()) {
+			return res.send(signupTemp({ req, err }));
 		}
+		const { email, password, passwordConfirmation } = req.body;
+		//create user
+		const newUser = await usersRepo.create({ email, password });
+
+		//store cookie using third party library
+		req.session.userId = newUser.id;
+
+		res.send('Account Created!!');
 	}
 );
 
