@@ -15,7 +15,9 @@ const signinTemp = require('../../views/admin/auth/signin');
 const {
 	requireEmail,
 	requirePassword,
-	requirePasswordConfirmation
+	requirePasswordConfirmation,
+	requireSignInEmail,
+	requireSignInPassword
 } = require('./validators');
 
 //SIGN UP router
@@ -56,47 +58,20 @@ router.get('/signin', (req, res) => {
 
 router.post(
 	'/signin',
-	[
-		//check for existance of email inside data storage
-		check('email')
-			.trim()
-			.normalizeEmail()
-			.isEmail()
-			.withMessage('Must be a valid email.')
-			.custom(async (email) => {
-				const user = await usersRepo.getOneBy({ email });
-				if (!user) {
-					throw new Error('Invalid email');
-				}
-			}),
-		check('password').trim().custom(async (password, { req }) => {
-			const user = await usersRepo.getOneBy({ email: req.body.email }); // param {object} with key and value pair
-			if (!user) {
-				throw new Error('Invalid password'); //counter the undefined user case
-			}
-			//compare password(saved,supplied)
-			const passwordCheck = await usersRepo.comparePassword(
-				user.password,
-				password
-			);
-
-			if (!passwordCheck) {
-				throw new Error('Invalid password');
-			}
-		})
-	],
+	[ requireSignInEmail, requireSignInPassword ],
 	async (req, res) => {
 		//validationResult
-		const errors = validationResult(req);
-		console.log(errors);
-		if (!errors.isEmpty()) {
-			res.send('Errors found');
+		const err = validationResult(req);
+		console.log(err);
+		if (!err.isEmpty()) {
+			return res.send(signinTemp(err));
 		}
 
 		//sign in (essentially manipulating cookies)
-
-		// req.session.userId = user.id;
-		// res.send('You are logged in!');
+		const { email } = req.body;
+		const user = usersRepo.getOneBy({ email });
+		req.session.userId = user.id;
+		res.send('You are logged in!');
 	}
 );
 
