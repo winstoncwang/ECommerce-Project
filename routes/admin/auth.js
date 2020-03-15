@@ -32,7 +32,7 @@ router.post(
 		if (!err.isEmpty()) {
 			return res.send(signupTemp({ req, err }));
 		}
-		const { email, password, passwordConfirmation } = req.body;
+		const { email, password } = req.body;
 		//create user
 		const newUser = await usersRepo.create({ email, password });
 
@@ -54,27 +54,50 @@ router.get('/signin', (req, res) => {
 	res.send(signinTemp());
 });
 
-router.post('/signin', async (req, res) => {
-	//check for existance of email inside data storage
-	const { email, password } = req.body;
-	const user = await usersRepo.getOneBy({ email });
-	if (!user) {
-		res.send('Invalid email, re-enter or sign up');
+router.post(
+	'/signin',
+	[
+		//check for existance of email inside data storage
+		check('email')
+			.trim()
+			.normalizeEmail()
+			.isEmail()
+			.withMessage('Must be a valid email.')
+			.custom(async (email) => {
+				const user = await usersRepo.getOneBy({ email });
+				if (!user) {
+					throw new Error('Invalid email');
+				}
+			}),
+		check('password').trim().custom(async (password, { req }) => {
+			const user = await usersRepo.getOneBy({ email: req.body.email }); // param {object} with key and value pair
+			if (!user) {
+				throw new Error('Invalid password'); //counter the undefined user case
+			}
+			//compare password(saved,supplied)
+			const passwordCheck = await usersRepo.comparePassword(
+				user.password,
+				password
+			);
+
+			if (!passwordCheck) {
+				throw new Error('Invalid password');
+			}
+		})
+	],
+	async (req, res) => {
+		//validationResult
+		const errors = validationResult(req);
+		console.log(errors);
+		if (!errors.isEmpty()) {
+			res.send('Errors found');
+		}
+
+		//sign in (essentially manipulating cookies)
+
+		// req.session.userId = user.id;
+		// res.send('You are logged in!');
 	}
-
-	//compare password(saved,supplied)
-	const passwordCheck = await usersRepo.comparePassword(
-		user.password,
-		password
-	);
-
-	if (!passwordCheck) {
-		res.send('Invalid password, please check again.');
-	}
-
-	//sign in (essentially manipulating cookies)
-	req.session.userId = user.id;
-	res.send('You are logged in!');
-});
+);
 
 module.exports = router;
