@@ -256,3 +256,9 @@ V 0.441
 
    extract validation logic and implement return signin form when login unsuccesful
  
+-----
+
+V 0.442
+
+   adding helper function to reduce duplication
+ 
