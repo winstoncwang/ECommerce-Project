@@ -244,3 +244,9 @@ V 0.433
 
    render signup form and display error if any
  
+-----
+
+V 0.44
+
+   validation for sign in form
+ 
