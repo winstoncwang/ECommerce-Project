@@ -262,3 +262,9 @@ V 0.442
 
    adding helper function to reduce duplication
  
+-----
+
+V 0.443
+
+   styling added to signin and signup
+ 
