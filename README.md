@@ -274,3 +274,9 @@ V 0.444
 
    public file to wire up css format etc
  
+-----
+
+V 0.445
+
+   quick bug fix to passwordConfirmation not working as intented
+ 
