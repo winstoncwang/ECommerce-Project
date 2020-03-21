@@ -286,3 +286,9 @@ V 0.45
 
    products page routes
  
+-----
+
+V 0.451
+
+   extend classes of repository for both products and users
+ 
