@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 //subrouter/middleware for our authentication
 const authRouter = require('./routes/admin/auth');
+//subrouter for product router
+const productsRouter = require('./routes/admin/products');
 
 const app = express();
 
@@ -20,8 +22,10 @@ app.use(
 		keys : [ 'asdasds' ]
 	})
 );
-//middle of express.Router, subrouter imported from auth.js
+//middleware of express.Router, subrouter imported from auth.js
 app.use(authRouter);
+//middleware of products.js
+app.use(productsRouter);
 
 app.listen(3000, () => {
 	console.log('listening');
