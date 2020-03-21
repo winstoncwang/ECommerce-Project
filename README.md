@@ -280,3 +280,9 @@ V 0.445
 
    quick bug fix to passwordConfirmation not working as intented
  
+-----
+
+V 0.45
+
+   products page routes
+ 
