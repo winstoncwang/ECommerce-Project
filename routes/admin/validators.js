@@ -2,6 +2,16 @@ const usersRepo = require('../../repositories/users');
 const { check } = require('express-validator');
 
 module.exports = {
+	//PRODUCT VALIDATION
+	requireTitle                : check('title')
+		.trim()
+		.isLength({ min: 5, max: 40 }),
+
+	requirePrice                : check('price')
+		.trim()
+		.toFloat()
+		.isFloat({ min: 1 }),
+
 	//SIGN UP VALIDATION
 	requireEmail                : check('email')
 		.trim()
