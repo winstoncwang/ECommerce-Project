@@ -292,3 +292,9 @@ V 0.451
 
    extend classes of repository for both products and users
  
+-----
+
+V 0.452
+
+   add product html template
+ 
