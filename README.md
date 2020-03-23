@@ -298,3 +298,9 @@ V 0.452
 
    add product html template
  
+-----
+
+V 0.453
+
+   adding product validators to validator.js
+ 
