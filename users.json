@@ -1,10 +1,5 @@
 [
   {
-    "email": "sodiuad@gmail.com",
-    "id": "5cb71a8d53",
-    "password": "asdu"
-  },
-  {
     "email": "test123@test.com",
     "password": "12345",
     "id": "d32af50e5c"
@@ -13,5 +8,20 @@
     "email": "owuej@gmail.com",
     "password": "f4ea481ad03aa7930bb503ed33a899e2b22b8c69fe84072e5c338b9bb073d0a6c45a598a6f5519487038cec8b5e9ebeb490f2f21fd3950f5eb9cb6af63f74f90.f76d57dcba415e3d",
     "id": "09bdb7da25"
+  },
+  {
+    "email": "test@test.com",
+    "password": "c9ab6aa43c70c2979ee230439d9a303b451991cf6ea72aa693f708fb5c511782d7c57981ad0e85627e4cea935c584060db6d617a4b4253b8298f60892a326196.f48f761f3fa37684",
+    "id": "a03ba22c86"
+  },
+  {
+    "email": "test1@test.com",
+    "password": "93317bfe5357aa8dc0152f3ac93190c010239f63161954e92d5d44762860fcdd20326c1415b09138bda5f9484f7b70b6e0d10e2ecac69fe9c654bdf3fe363fd4.896b420da4a0413f",
+    "id": "ea380667b0"
+  },
+  {
+    "email": "test2@test.com",
+    "password": "c396baf9ed337cb348c1483ddad732b0f0c9548aa9429b21737457183ecfaf229753d3b6d6c4aa84bfc9532d690e59dd351bb5c8e1fcf64110dba16179c6d4ef.4a52f6c4d30b99da",
+    "id": "663245abd4"
   }
 ]

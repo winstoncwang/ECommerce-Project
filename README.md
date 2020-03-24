@@ -196,3 +196,111 @@ V 0.36
 
    full flow and improvements
   
+-----
+
+V 0.41
+
+   implement sub router middleware for auth.js
+ 
+-----
+
+V 0.411
+
+   refractor of the html template
+ 
+-----
+
+V 0.412
+
+   introducing full html template
+ 
+-----
+
+V 0.42
+
+   setup express validator for our authentication form
+ 
+-----
+
+V 0.43
+
+   email password validation and sanitization
+ 
+-----
+
+V 0.431
+
+   adding custom validation for email and pass
+ 
+-----
+
+V 0.432
+
+   customised validator extracted
+ 
+-----
+
+V 0.433
+
+   render signup form and display error if any
+ 
+-----
+
+V 0.44
+
+   validation for sign in form
+ 
+-----
+
+V 0.441
+
+   extract validation logic and implement return signin form when login unsuccesful
+ 
+-----
+
+V 0.442
+
+   adding helper function to reduce duplication
+ 
+-----
+
+V 0.443
+
+   styling added to signin and signup
+ 
+-----
+
+V 0.444
+
+   public file to wire up css format etc
+ 
+-----
+
+V 0.445
+
+   quick bug fix to passwordConfirmation not working as intented
+ 
+-----
+
+V 0.45
+
+   products page routes
+ 
+-----
+
+V 0.451
+
+   extend classes of repository for both products and users
+ 
+-----
+
+V 0.452
+
+   add product html template
+ 
+-----
+
+V 0.453
+
+   adding product validators to validator.js
+ 
