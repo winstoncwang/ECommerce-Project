@@ -304,3 +304,9 @@ V 0.453
 
    adding product validators to validator.js
  
+-----
+
+V 0.51
+
+   adding more validatio message and use multer for image upload
+ 
