@@ -8,12 +8,12 @@ module.exports = class Repository {
 		}
 
 		this.filename = filename;
-		console.log(this.filename);
 		//async function cannot be used inside contructor
 		//fs throws error
 		try {
 			fs.accessSync(this.filename);
 		} catch (err) {
+			console.log(this.filename);
 			fs.writeFileSync(this.filename, '[]');
 		}
 	}

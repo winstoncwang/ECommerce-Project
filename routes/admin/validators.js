@@ -5,12 +5,14 @@ module.exports = {
 	//PRODUCT VALIDATION
 	requireTitle                : check('title')
 		.trim()
-		.isLength({ min: 5, max: 40 }),
+		.isLength({ min: 5, max: 40 })
+		.withMessage('Must be between 5 to 40 characters long.'),
 
 	requirePrice                : check('price')
 		.trim()
 		.toFloat()
-		.isFloat({ min: 1 }),
+		.isFloat({ min: 1 })
+		.withMessage('Must have a value of 0 or more.'),
 
 	//SIGN UP VALIDATION
 	requireEmail                : check('email')
