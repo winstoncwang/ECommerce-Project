@@ -310,3 +310,9 @@ V 0.51
 
    adding more validatio message and use multer for image upload
  
+-----
+
+V 0.52
+
+   validator before parsed data causing error bug, adding product information
+ 
