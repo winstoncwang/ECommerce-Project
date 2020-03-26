@@ -23,7 +23,7 @@ module.exports = class Repository {
 		attrs.id = this.randomID();
 		//read in data
 		const products = await this.getAll();
-		products.push(attr);
+		products.push(attrs);
 		await this.writeAll(products);
 
 		return attrs;

@@ -16,13 +16,31 @@ router.get('/admin/products/new', (req, res) => {
 	res.send(productsNewTemp({}));
 });
 
+/*  
+	custom validator and multer parser need to change place.
+	
+	Having upload(multer middleware) used replaces bodyparser's function.
+
+	Hence the validator appearing before multer middleware will validate 
+	empty key to produce invalid value.
+
+	Multer middleware also produced parsed key value pair, so having
+	validation after upload.single will be the right setup.
+*/
+
 router.post(
 	'/admin/products/new',
-	[ requireTitle, requirePrice ],
 	upload.single('image'),
-	(req, res) => {
+	[ requireTitle, requirePrice ],
+	async (req, res) => {
 		const err = validationResult(req);
-		console.log(req.file);
+
+		if (!err.isEmpty()) {
+			res.send(productsNewTemp({ err }));
+		}
+		const image = req.file.buffer.toString('base64'); //enconding the buffer info. its safer than raw info. but not product ready.
+		const { title, price } = req.body;
+		await productsRepo.create({ title, price, image });
 
 		res.send('sub');
 	}
