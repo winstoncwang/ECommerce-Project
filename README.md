@@ -316,3 +316,9 @@ V 0.52
 
    validator before parsed data causing error bug, adding product information
  
+-----
+
+V 0.521
+
+   new product page styling changed
+ 
