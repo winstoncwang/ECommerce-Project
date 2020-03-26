@@ -322,3 +322,9 @@ V 0.521
 
    new product page styling changed
  
+-----
+
+V 0.522
+
+   bug fixed: email validation not working as intended
+ 
