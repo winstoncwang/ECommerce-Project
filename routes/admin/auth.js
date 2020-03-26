@@ -30,10 +30,10 @@ router.post(
 	[ requireEmail, requirePassword, requirePasswordConfirmation ],
 	async (req, res) => {
 		//validator object
-		const err = validationResult(req);
-		console.log(err);
-		if (!err.isEmpty()) {
-			return res.send(signupTemp(err));
+		const errors = validationResult(req);
+		console.log(errors);
+		if (!errors.isEmpty()) {
+			return res.send(signupTemp({ req, errors }));
 		}
 		const { email, password } = req.body;
 		//create user

@@ -20,9 +20,11 @@ module.exports = {
 		.normalizeEmail()
 		.isEmail()
 		.withMessage('Please enter a valid email')
-		.custom(async (emailInput) => {
+		.custom(async (email) => {
 			//check email duplication
-			const exisitingUser = await usersRepo.getOneBy({ emailInput });
+
+			const exisitingUser = await usersRepo.getOneBy({ email });
+			console.log('existing user', exisitingUser);
 			if (exisitingUser) {
 				throw new Error('Invalid email');
 			}
@@ -38,11 +40,13 @@ module.exports = {
 		.isLength({ min: 4, max: 20 })
 		.withMessage('Must be between 4 and 20 characters long')
 		.custom((passwordConfirmation, { req }) => {
+			//synchronous function requires are true value statment
 			//check password confirmation
 			if (passwordConfirmation !== req.body.password) {
 				throw new Error('Password must match');
+			} else {
+				return true;
 			}
-			return Promise.resolve();
 		}),
 	//SIGN IN VALIDATION
 	requireSignInEmail          : check('email')

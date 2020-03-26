@@ -100,10 +100,13 @@ As long as the key-value is equal, return user. No of filter is inaffective.
 			let found = true;
 
 			for (let key in filters) {
+				console.log('key', key);
+				console.log('userkey', user[key], 'filterkey', filters[key]);
 				if (user[key] !== filters[key]) {
 					found = false;
 				}
 			}
+
 			if (found) {
 				return user;
 			}
