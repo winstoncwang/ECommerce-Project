@@ -334,3 +334,9 @@ V 0.523
 
    custom middleware for error handling
  
+-----
+
+V 0.53
+
+   display existing product and redirect user on success
+ 
