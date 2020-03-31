@@ -39,7 +39,7 @@ router.post(
 		//store cookie using third party library
 		req.session.userId = newUser.id;
 
-		res.send('Account Created!!');
+		res.redirect('/admin/products');
 	}
 );
 
@@ -70,7 +70,8 @@ router.post(
 		const { email } = req.body;
 		const user = usersRepo.getOneBy({ email });
 		req.session.userId = user.id;
-		res.send('You are logged in!');
+
+		res.redirect('/admin/products');
 	}
 );
 
