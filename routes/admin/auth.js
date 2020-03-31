@@ -19,22 +19,19 @@ const {
 	requireSignInEmail,
 	requireSignInPassword
 } = require('./validators');
+//custom middleware
+const { errorHandler } = require('./middlewares');
 
 //SIGN UP router
 router.get('/signup', (req, res) => {
-	res.send(signupTemp({ req }));
+	res.send(signupTemp({}));
 });
 
 router.post(
 	'/signup',
 	[ requireEmail, requirePassword, requirePasswordConfirmation ],
+	errorHandler(signupTemp),
 	async (req, res) => {
-		//validator object
-		const errors = validationResult(req);
-		console.log(errors);
-		if (!errors.isEmpty()) {
-			return res.send(signupTemp({ req, errors }));
-		}
 		const { email, password } = req.body;
 		//create user
 		const newUser = await usersRepo.create({ email, password });
@@ -54,19 +51,20 @@ router.get('/signout', (req, res) => {
 
 //SIGN IN
 router.get('/signin', (req, res) => {
-	res.send(signinTemp());
+	res.send(signinTemp({}));
 });
 
 router.post(
 	'/signin',
 	[ requireSignInEmail, requireSignInPassword ],
+	errorHandler(signinTemp),
 	async (req, res) => {
-		//validationResult
-		const err = validationResult(req);
-		console.log(err);
-		if (!err.isEmpty()) {
-			return res.send(signinTemp(err));
-		}
+		// //validationResult
+		// const err = validationResult(req);
+		// console.log(err);
+		// if (!err.isEmpty()) {
+		// 	return res.send(signinTemp(err));
+		// }
 
 		//sign in (essentially manipulating cookies)
 		const { email } = req.body;
