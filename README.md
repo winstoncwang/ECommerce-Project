@@ -328,3 +328,9 @@ V 0.522
 
    bug fixed: email validation not working as intended
  
+-----
+
+V 0.523
+
+   custom middleware for error handling
+ 
