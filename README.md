@@ -340,3 +340,9 @@ V 0.53
 
    display existing product and redirect user on success
  
+-----
+
+V 0.54
+
+   require auth for product view, redirect with failed validation, await bug fixed for signin
+ 
