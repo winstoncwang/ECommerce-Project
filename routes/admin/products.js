@@ -6,18 +6,18 @@ const productsRepo = require('../../repositories/products');
 const productsNewTemp = require('../../views/admin/products/new');
 const productsIndexTemp = require('../../views/admin/products/index');
 const { requireTitle, requirePrice } = require('./validators');
-const { errorHandler } = require('./middlewares');
+const { errorHandler, requireAuth } = require('./middlewares');
 
 const router = express.Router();
 
 const upload = multer({ storage: multer.memoryStorage() }); //large files will consume alot of memory storage
 
-router.get('/admin/products', async (req, res) => {
+router.get('/admin/products', requireAuth, async (req, res) => {
 	const products = await productsRepo.getAll();
 	res.send(productsIndexTemp({ products }));
 });
 
-router.get('/admin/products/new', (req, res) => {
+router.get('/admin/products/new', requireAuth, (req, res) => {
 	res.send(productsNewTemp({}));
 });
 
@@ -35,6 +35,7 @@ router.get('/admin/products/new', (req, res) => {
 
 router.post(
 	'/admin/products/new',
+	requireAuth,
 	upload.single('image'),
 	[ requireTitle, requirePrice ],
 	errorHandler(productsNewTemp),

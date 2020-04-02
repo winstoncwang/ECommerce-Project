@@ -59,16 +59,9 @@ router.post(
 	[ requireSignInEmail, requireSignInPassword ],
 	errorHandler(signinTemp),
 	async (req, res) => {
-		// //validationResult
-		// const err = validationResult(req);
-		// console.log(err);
-		// if (!err.isEmpty()) {
-		// 	return res.send(signinTemp(err));
-		// }
-
 		//sign in (essentially manipulating cookies)
 		const { email } = req.body;
-		const user = usersRepo.getOneBy({ email });
+		const user = await usersRepo.getOneBy({ email });
 		req.session.userId = user.id;
 
 		res.redirect('/admin/products');
