@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator');
 const multer = require('multer');
 
 const productsRepo = require('../../repositories/products');
+const productsEditTemp = require('../../views/admin/products/edit');
 const productsNewTemp = require('../../views/admin/products/new');
 const productsIndexTemp = require('../../views/admin/products/index');
 const { requireTitle, requirePrice } = require('./validators');
@@ -47,5 +48,15 @@ router.post(
 		res.redirect('/admin/products');
 	}
 );
+
+//get method edit page
+router.get('/admin/products/:id/edit', async (req, res) => {
+	const product = await productsRepo.getOne(req.params.id);
+	if (!product) {
+		return res.send('Product not found!');
+	}
+
+	res.send(productsEditTemp({ product }));
+});
 
 module.exports = router;
