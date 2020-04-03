@@ -352,3 +352,9 @@ V 0.55
 
    index.js product template update
  
+-----
+
+V 0.56
+
+   product edit routing and template import
+ 
