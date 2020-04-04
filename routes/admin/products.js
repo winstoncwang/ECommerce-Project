@@ -50,7 +50,7 @@ router.post(
 );
 
 //get method edit page
-router.get('/admin/products/:id/edit', async (req, res) => {
+router.get('/admin/products/:id/edit', requireAuth, async (req, res) => {
 	const product = await productsRepo.getOne(req.params.id);
 	if (!product) {
 		return res.send('Product not found!');
@@ -58,5 +58,27 @@ router.get('/admin/products/:id/edit', async (req, res) => {
 
 	res.send(productsEditTemp({ product }));
 });
+
+//post method edit page
+router.post(
+	'/admin/products/:id/edit',
+	requireAuth,
+	upload.single('image'),
+	[ requireTitle, requirePrice ],
+	errorHandler(productsEditTemp, async (req) => {
+		const product = await productsRepo.getOne(req.params.id);
+		return product;
+	}),
+	async (req, res) => {
+		const { title, price } = req.body;
+		const { image } = req.file.buffer.toString('base64');
+		try {
+			await productsRepo.update(req.params.id, { title, price, image }); //this could go wrong
+		} catch (err) {
+			res.send('err');
+		}
+		res.redirect('/admin/products/');
+	}
+);
 
 module.exports = router;
