@@ -358,3 +358,9 @@ V 0.56
 
    product edit routing and template import
  
+-----
+
+V 0.57
+
+   update edit page with new title price etc, errorhandler updated with new product param.
+ 
