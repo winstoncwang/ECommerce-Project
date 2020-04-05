@@ -376,3 +376,9 @@ V 0.581
 
    delete product button implemented
  
+-----
+
+V 0.582
+
+   create new product with no image and fix delete button
+ 
