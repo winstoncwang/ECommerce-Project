@@ -67,7 +67,7 @@ router.post(
 	[ requireTitle, requirePrice ],
 	errorHandler(productsEditTemp, async (req) => {
 		const product = await productsRepo.getOne(req.params.id);
-		return product;
+		return { product };
 	}),
 	async (req, res) => {
 		const { title, price } = req.body;

@@ -12,8 +12,10 @@ module.exports = {
 				if (productCb) {
 					product = await productCb(req);
 				}
-				console.log(product);
-				return res.send(templateFunc({ errors, product }));
+				return res.send(templateFunc({ errors, ...product }));
+
+				/* product is {product{title:'',price:'',image:'',id:''}}
+				so we use spread ...product to pass a new product object */
 
 				/*return is necessary here since res.send sends a header to the client notify them 
 			there is a error. if you remove the return statement, everything will continue until res.send(sub). This causes error when the
