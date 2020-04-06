@@ -370,3 +370,9 @@ V 0.58
 
    debug to correct the product object, template update for edit.js
  
+-----
+
+V 0.581
+
+   delete product button implemented
+ 

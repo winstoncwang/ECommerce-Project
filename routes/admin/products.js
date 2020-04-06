@@ -41,7 +41,14 @@ router.post(
 	[ requireTitle, requirePrice ],
 	errorHandler(productsNewTemp),
 	async (req, res) => {
-		const image = req.file.buffer.toString('base64'); //enconding the buffer info. its safer than raw info. but not product ready.
+		let image = '';
+		console.log(req.file);
+		try {
+			image = req.file.buffer.toString('base64'); //enconding the buffer info. its safer than raw info. but not product ready.
+		} catch (e) {
+			console.log(e);
+			if (e) image = '';
+		}
 		const { title, price } = req.body;
 		await productsRepo.create({ title, price, image });
 
@@ -80,5 +87,12 @@ router.post(
 		res.redirect('/admin/products/');
 	}
 );
+
+//post method delete
+router.post('/admin/products/:id/delete', requireAuth, async (req, res) => {
+	await productsRepo.delete(req.params.id);
+
+	res.redirect('/admin/products');
+});
 
 module.exports = router;
