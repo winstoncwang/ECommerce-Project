@@ -42,13 +42,11 @@ router.post(
 	errorHandler(productsNewTemp),
 	async (req, res) => {
 		let image = '';
-		console.log(req.file);
-		try {
+		if (typeof req.file !== 'undefined') {
+			//double check for image, if empty, make image empty
 			image = req.file.buffer.toString('base64'); //enconding the buffer info. its safer than raw info. but not product ready.
-		} catch (e) {
-			console.log(e);
-			if (e) image = '';
 		}
+
 		const { title, price } = req.body;
 		await productsRepo.create({ title, price, image });
 
