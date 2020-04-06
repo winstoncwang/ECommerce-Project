@@ -364,3 +364,9 @@ V 0.57
 
    update edit page with new title price etc, errorhandler updated with new product param.
  
+-----
+
+V 0.58
+
+   debug to correct the product object, template update for edit.js
+ 
