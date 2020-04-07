@@ -388,3 +388,9 @@ V 0.61
 
    setup seed product.json file and add add route for product
  
+-----
+
+V 0.62
+
+   adding user facing product route file
+ 
