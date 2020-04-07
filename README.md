@@ -394,3 +394,9 @@ V 0.62
 
    adding user facing product route file
  
+-----
+
+V 0.621
+
+   setup route in index.js and setup template view/index.js
+ 
