@@ -400,3 +400,9 @@ V 0.621
 
    setup route in index.js and setup template view/index.js
  
+-----
+
+V 0.622
+
+   adding more images and layout for product index
+ 
