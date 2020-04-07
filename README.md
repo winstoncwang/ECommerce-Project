@@ -382,3 +382,9 @@ V 0.582
 
    create new product with no image and fix delete button
  
+-----
+
+V 0.61
+
+   setup seed product.json file and add add route for product
+ 
