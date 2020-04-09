@@ -418,3 +418,9 @@ V 0.63
 
    setup carts subrouter js file and update index js
  
+-----
+
+V 0.631
+
+   update user facing index page and cart id config
+ 
