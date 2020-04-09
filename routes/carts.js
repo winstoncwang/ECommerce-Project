@@ -7,14 +7,33 @@ const router = express.Router();
 //route for add to cart button POST
 router.post('/cart/products', async (req, res) => {
 	//check the cart id
+	let cart;
 	if (!req.session.cartId) {
 		//if a new user create a cart id
-		const cart = await cartsRepo.create({ items: [] });
+		cart = await cartsRepo.create({ items: [] });
 		req.session.cartId = cart.id;
 	} else {
 		//find existing cart id
-		const cart = await cartsRepo.getOne(req.session.cartId);
+		cart = await cartsRepo.getOne(req.session.cartId);
 	}
+
+	//find if there is a existingItem
+	const existingItem = cart.items.find(
+		(item) => item.id === req.body.productId
+	);
+
+	if (existingItem) {
+		//increment quantity
+		existingItem.quantity++;
+	} else {
+		//add to items
+		cart.items.push({ id: req.body.productId, quantity: 1 });
+	}
+
+	//update(id, items:cart.items)
+	await cartsRepo.update(cart.id, { items: cart.items });
+
+	res.send('product added!');
 });
 
 //route for display cart products GET
