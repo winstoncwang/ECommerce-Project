@@ -9,5 +9,5 @@ router.get('/', async (req, res) => {
 	const products = await productsRepo.getAll();
 	res.send(productsIndexTemp({ products }));
 });
-
+2
 module.exports = router;

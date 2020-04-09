@@ -10,6 +10,8 @@ const authRouter = require('./routes/admin/auth');
 const adminProductsRouter = require('./routes/admin/products');
 //subrouter for user facing product
 const productsRouter = require('./routes/products');
+//subrouter for cart product
+const cartsRouter = require('./routes/carts');
 
 const app = express();
 
@@ -30,6 +32,8 @@ app.use(authRouter);
 app.use(adminProductsRouter);
 //use product.js user facing
 app.use(productsRouter);
+//use carts product
+app.use(cartsRouter);
 
 app.listen(3000, () => {
 	console.log('listening');
