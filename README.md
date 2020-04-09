@@ -424,3 +424,9 @@ V 0.631
 
    update user facing index page and cart id config
  
+-----
+
+V 0.64
+
+   add cart adding feature for the add to cart button
+ 
