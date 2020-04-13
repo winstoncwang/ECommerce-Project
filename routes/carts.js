@@ -1,6 +1,9 @@
 const express = require('express');
 
 const cartsRepo = require('../repositories/carts');
+const productsRepo = require('../repositories/products');
+
+const cartsShowTemp = require('../views/carts/show');
 
 const router = express.Router();
 
@@ -37,6 +40,25 @@ router.post('/cart/products', async (req, res) => {
 });
 
 //route for display cart products GET
+router.get('/cart', async (req, res) => {
+	//check if they have a cartId or is an existing user
+	if (!req.session.cartId) {
+		return res.redirect('/');
+	}
+
+	const cart = await cartsRepo.getOne(req.session.cartId);
+
+	for (let item of cart.items) {
+		const product = await productsRepo.getOne(item.id);
+		//hand product info to cart object
+		//this is not written into the repo, so no duplicated data.
+		item.product = product;
+	}
+
+	console.log(cart.items);
+	res.send(cartsShowTemp({ items: cart.items }));
+});
+
 //route for delete button in cart product page POST
 
 module.exports = router;
