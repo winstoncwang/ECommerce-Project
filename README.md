@@ -430,3 +430,9 @@ V 0.64
 
    add cart adding feature for the add to cart button
  
+-----
+
+V 0.65
+
+   showing cart products on cart page
+ 
