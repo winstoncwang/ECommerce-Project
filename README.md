@@ -436,3 +436,9 @@ V 0.65
 
    showing cart products on cart page
  
+-----
+
+V 0.651
+
+   quick template upgrade
+ 
