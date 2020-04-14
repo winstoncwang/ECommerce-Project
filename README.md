@@ -442,3 +442,9 @@ V 0.651
 
    quick template upgrade
  
+-----
+
+V 0.652
+
+   adding in totalPrice value
+ 
