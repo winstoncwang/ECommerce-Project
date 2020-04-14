@@ -36,7 +36,7 @@ router.post("/cart/products", async (req, res) => {
   //update(id, items:cart.items)
   await cartsRepo.update(cart.id, { items: cart.items });
 
-  res.send("product added!");
+  res.redirect("/cart");
 });
 
 //route for display cart products GET
@@ -68,6 +68,8 @@ router.post("/cart/:id/delete", async (req, res) => {
   });
   console.log(filteredCart);
   await cartsRepo.update(req.session.cartId, { items: filteredCart });
+
+  res.redirect("/cart");
 });
 
 module.exports = router;

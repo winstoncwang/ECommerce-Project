@@ -451,3 +451,9 @@ adding in totalPrice value
 V 0.66
 
 adding carts deleting logic
+
+---
+
+V 0.661
+
+adding redirect logic
