@@ -7,7 +7,11 @@ const cookieSession = require('cookie-session');
 //subrouter/middleware for our authentication
 const authRouter = require('./routes/admin/auth');
 //subrouter for product router
-const productsRouter = require('./routes/admin/products');
+const adminProductsRouter = require('./routes/admin/products');
+//subrouter for user facing product
+const productsRouter = require('./routes/products');
+//subrouter for cart product
+const cartsRouter = require('./routes/carts');
 
 const app = express();
 
@@ -25,7 +29,11 @@ app.use(
 //middleware of express.Router, subrouter imported from auth.js
 app.use(authRouter);
 //middleware of products.js
+app.use(adminProductsRouter);
+//use product.js user facing
 app.use(productsRouter);
+//use carts product
+app.use(cartsRouter);
 
 app.listen(3000, () => {
 	console.log('listening');
