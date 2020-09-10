@@ -35,6 +35,8 @@ app.use(productsRouter);
 //use carts product
 app.use(cartsRouter);
 
-app.listen(3000, () => {
-	console.log('listening');
+//heroku bind port
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+	console.log(`The app is running on port: ${PORT}`);
 });
