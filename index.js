@@ -1,5 +1,5 @@
 const express = require('express');
-
+const path = require('path');
 //express middleware bodyparser to read buffer info
 const bodyParser = require('body-parser');
 //adding in cookies to ensure server knows the right user by validating id
@@ -13,10 +13,13 @@ const productsRouter = require('./routes/products');
 //subrouter for cart product
 const cartsRouter = require('./routes/carts');
 
+//heroku bind port
+const PORT = process.env.PORT || 5000;
+
 const app = express();
 
 //express middleware that looks into public folder and make everything available.
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 //parses the buffer info from RESTAPI and parse the data, push into req.body
 app.use(bodyParser.urlencoded({ extended: true }));
 //middleware that deals with cookiesession. which is used to identify user and ensure the right
@@ -34,9 +37,6 @@ app.use(adminProductsRouter);
 app.use(productsRouter);
 //use carts product
 app.use(cartsRouter);
-
-//heroku bind port
-const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
 	console.log(`The app is running on port: ${PORT}`);
